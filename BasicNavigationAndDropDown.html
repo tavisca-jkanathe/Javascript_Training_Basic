@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      
+       
+        <style>
+            #body-div
+            {
+                height: 500px;
+            }
+            #header
+            {
+                height:20%;
+                background-color: rgb(36, 36, 133);
+                text-align: center;
+                align-content: center;
+                padding: 20px;
+            }
+            footer
+            {
+                height:20% ;
+                background-color: rgb(36, 36, 133);
+                text-align: center;
+                align-content: center;
+                padding: 20px;
+                
+            }
+            #main-div
+            {
+                background-color: brown;
+                height: 60%;
+            }
+            #left-div
+            {
+                background-color: rgb(43, 198, 226);
+                float: left;
+                width: 20%;
+                height: 100%;
+            }
+            #right-div
+            {
+                align-content: center;
+                background-color: blueviolet;
+                float: left;
+                width: 80%;
+                height:100%;
+            }
+            #nav-list
+            {
+                list-style-type: none;
+                padding: 0%;
+                margin-left: 0%;
+            }
+            .list
+            {
+                align-content: center;
+                text-align: center;
+                border: 1px;
+                padding: 10px;
+            border-color: black;
+            border-style: solid;
+            }
+            li:hover {
+  background-color:darkslategray;
+        }
+        * { box-sizing: border-box; }
+body {
+  font: 16px Arial; 
+}
+.autocomplete {
+  position: relative;
+  margin: 20px;
+  align-content: center;
+  align-items: center;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  width: 280px;
+  padding: 10px;
+  font-size: 14px;
+}
+#sub-button
+{
+    width:100px;
+    background-color:teal;
+}
+            
+        </style>
+
+    </head>
+    <body>
+    <div id="body-div">
+        <div id="header">
+             Navigation Bar and Dropdown Header
+        </div>
+        <div id="main-div">
+            <div id= "left-div">
+                <ul id="nav-list">
+                    <li class="list">Todo</li>
+                    <li class="list">User</li>
+                    <li class="list">department</li>
+                    <li class="list">Logout</li>
+                </ul>
+            </div>
+            <div id="right-div">
+                        <div class="autocomplete" style="width:300px;">
+                          <input id="myInput"list="tasklist" type="text" name="task" placeholder="Select Task">
+                         
+  <datalist id="tasklist">
+    <option value="Task1">
+    <option value="Task2">
+    <option value="Task3">
+    <option value="Task4">
+    <option value="Task5">
+  </datalist>
+                        </div>
+                        <button  id="sub-button">ADD</button>
+                     
+
+            </div>
+        </div>
+        <footer>
+            Navigation Bar and Dropdown Footer
+        </footer>
+    </div>
+    </body>
+</html>
