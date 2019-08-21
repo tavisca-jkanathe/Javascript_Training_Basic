@@ -1,49 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      
-       
-        <style>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
             #body-div
             {
-                height: 500px;
+                height: 100%;
             }
-            #header
+            header
             {
-                height:20%;
+                height:10%;
                 background-color: rgb(36, 36, 133);
+                color: #d4d4d4;
                 text-align: center;
                 align-content: center;
-                padding: 20px;
+                padding: 1%;
+                left: 0;
+                top: 0;
+                width: 100%;
             }
             footer
             {
-                height:20% ;
+                height:10% ;
                 background-color: rgb(36, 36, 133);
+                color: #d4d4d4;
                 text-align: center;
                 align-content: center;
-                padding: 20px;
+                padding: 1%;
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
                 
             }
             #main-div
             {
-                height: 60%;
+                height: 80%;
             }
             #left-div
             {
                 background-color: rgb(43, 198, 226);
-                float: left;
+               
                 width: 20%;
                 height: 100%;
+                float:left;
             }
-            #right-div
+            .right-div
             {
                 align-content: center;
-                float: left;
+                justify-content: center;
+                padding: 2%;
+                bottom: 80px;
+                float:left;
                 width: 80%;
                 height:100%;
+                display: none;
             }
-            #nav-list
+            #right-div-todo
+            {
+                display: inline-block;
+            }
+            .nav-list
             {
                 list-style-type: none;
                 padding: 0%;
@@ -70,7 +92,6 @@ body {
   margin: 20px;
   align-content: center;
   align-items: center;
-  display: inline-block;
 }
 input {
   border: 1px solid transparent;
@@ -79,49 +100,300 @@ input {
   padding: 10px;
   font-size: 14px;
 }
-#sub-button
+
+#tasklist
 {
-    width:100px;
-    background-color:teal;
+    background-color: white;
+    display:none;
+    width: 280px;
+  padding: 10px;
+    float:left; 
+    clear: left;
+    position: relative;
 }
+#tasklistul
+{
+    position:absolute;
+    float: left;
+}
+
+
+</style>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;  
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+button {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid transparent;
+  width:100px;
+  padding: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.listitems {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  width: 280px;
+}
+
+.listitems div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.listitems div:hover {
+  background-color:grey; 
+}
+#table-element {
+    border: 1px solid #d4d4d4; 
+    padding: 10px;
+    margin:10px;
+    border-collapse: collapse;
+}
+td, th{
+    border: 1px solid #d4d4d4; 
+    padding: 10px;
+    column-span: none;
+     border-collapse: collapse;
+}
+
+
+</style>
+</head>     
+<body>
+
+
+
+<div id="body-div">
+  <header>
+      Todo Header
+  </header>
+  <div id="main-div">
+      <div id= "left-div">
+          <ul class="nav-list">
+              <li class="list" id="todo" onclick="showdiv('todo')">Todo</li>
+              <li class="list" id="user" onclick="showdiv('user')">User</li>
+              <li class="list" id="dept" onclick="showdiv('dept')">department</li>
+              <li class="list" id="about" onclick="showdiv('about')">About</li>
+          </ul>
+      </div>
+      <div class="right-div" id="right-div-todo">
+
+        <p></p>
+        <div>
+          <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" name="mytask" placeholder="task" 
+            onfocus="showlist()"
+            onblur="hidelist()"
+            onkeyup="showsuggestion(document.getElementById('myInput').value)">
             
-        </style>
+          
+          </div>
+          <button>Search</button>
+          <button onclick ="addtask()">ADD</button>
+          </div>
+          <div id="table-div">
+              <table id="table-element">
+                  <th>task</th><th>task details</th>
+                  <th></th><th></th>
+              </table>
 
-    </head>
-    <body>
-    <div id="body-div">
-        <div id="header">
-             Navigation Bar and Dropdown Header
-        </div>
-        <div id="main-div">
-            <div id= "left-div">
-                <ul id="nav-list">
-                    <li class="list">Todo</li>
-                    <li class="list">User</li>
-                    <li class="list">department</li>
-                    <li class="list">Logout</li>
-                </ul>
-            </div>
-            <div id="right-div">
-                        <div class="autocomplete" style="width:300px;">
-                          <input id="myInput"list="tasklist" type="text" name="task" placeholder="Select Task">
-                         
-  <datalist id="tasklist">
-    <option value="Task1">
-    <option value="Task2">
-    <option value="Task3">
-    <option value="Task4">
-    <option value="Task5">
-  </datalist>
-                        </div>
-                        <button  id="sub-button">ADD</button>
-                     
+          </div>
+                  
+               
 
-            </div>
+      </div>
+      <div class="right-div" id="right-div-user">
+
+            <p></p>
+              <h2>User Panel</h2>
+                  
         </div>
-        <footer>
-            Navigation Bar and Dropdown Footer
-        </footer>
-    </div>
-    </body>
+        <div class="right-div" id="right-div-dept">
+
+                <p></p>
+                  <h2>Department Panel</h2>
+                      
+            </div>
+            <div class="right-div" id="right-div-about">
+
+                    <p></p>
+                      <h2>About Us</h2>
+                          
+                </div>
+  </div>
+  <footer>
+      Todo Footer
+  </footer>
+</div>
+
+
+
+
+
+
+<script>
+  var alltasks = ["brush","cook", "run", "exercise", "walk", "dance", "runjob"];
+
+
+function showdiv(selectdiv)
+ {
+    var navlist = document.getElementsByClassName("right-div");
+
+    var i;
+    for(i=0;i<navlist.length;i++)
+    {
+        navlist[i].style.display="none";
+    }
+    document.getElementsByClassName("right-div")
+        document.getElementById("right-div-"+selectdiv).style.display="block";
+
+ }
+  function hideallLists() {
+    var x = document.getElementsByClassName("listitems");
+    for (var i = 0; i < x.length; i++) {
+        x[i].parentNode.removeChild(x[i]);
+      
+    }
+  }
+  
+  
+ function hidelist()
+ {
+     var finallists = document.getElementById("myInputsuggestionlist");
+     //alert("hello");
+     finallists.onclick = function(){
+         //alert("hello");
+         var getinputelement= document.getElementById("myInput");
+              getinputelement.value = this.getElementsByTagName("input")[0].value;
+     };
+     hideallLists();
+ }
+
+function showlist()
+{
+
+  
+}
+function addtask()
+{
+    var inputelementval= document.getElementById("myInput").value;
+    if(inputelementval!="")
+    {
+    alltasks.push(inputelementval);
+    var st= alltasks.length-1;
+    showtable(st,alltasks.length);
+    }
+}
+
+
+      var clickelement =document.getElementById("finallist");
+     
+      
+  
+ 
+function showsuggestion(inputvalue)
+{
+    var sortedlist = [];
+    var a,b;
+    var input;
+    inputelement= document.getElementById("myInput");
+    hideallLists();
+    var x = document.getElementsByClassName("listitems");
+    for (var i = 0; i < x.length; i++) {
+        x[i].parentNode.removeChild(x[i]);
+      
+    }
+
+      a = document.createElement("DIV");
+      a.setAttribute("id", inputelement.id + "suggestionlist");
+      a.setAttribute("class", "listitems");
+      inputelement.parentNode.appendChild(a);
+      
+    
+    for (i = 0; i < alltasks.length; i++) {
+        if (alltasks[i].substr(0, inputvalue.length).toUpperCase() == inputvalue.toUpperCase()) {
+          sortedlist.push(alltasks[i]);
+          
+        }
+      }
+      for(i = 0; i < sortedlist.length; i++)
+      {
+        b = document.createElement("DIV");
+        b.setAttribute("id","finallist");
+          b.innerHTML = sortedlist[i];
+          b.innerHTML += "<input type='hidden' value='" + sortedlist[i] + "'>";
+          b.onclick = function(){
+              inputelement.value = this.getElementsByTagName("input")[0].value;
+              hideallLists();
+          
+          };
+          a.appendChild(b);
+      }
+     
+    
+}
+function showtable(start,end)
+{
+    var tableelement = document.getElementById("table-element");
+    var tablerow,tabledata1, tabledata2, edit, del;
+    for(i = start; i < end; i++)
+      {
+        tablerow = document.createElement("tr");
+        tableelement.appendChild(tablerow);
+
+        tabledata1 = document.createElement("td");
+          tabledata1.innerHTML =alltasks[i];
+          tablerow.appendChild(tabledata1);
+
+          tabledata2 = document.createElement("td");
+          tabledata2.innerHTML ="null";
+          tablerow.appendChild(tabledata2);
+
+          edit= document.createElement("td");
+          edit.innerHTML ="<a href=\"JavaScript:Void(0);\">edit</a>";
+          tablerow.appendChild(edit);
+
+          del = document.createElement("td");
+          del.innerHTML ="<a href=\"JavaScript:Void(0);\">delete</a>";
+          tablerow.appendChild(del);
+          
+          
+          
+      }
+}
+showtable(0,alltasks.length);
+
+</script>
+
+</body>
 </html>
